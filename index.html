@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prueba de Impedancia / Resistencia Interna</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="titlebar">
+      <h1>PRUEBA DE IMPEDANCIA / RESISTENCIA INTERNA</h1>
+    </header>
+
+    <section class="card">
+      <h2>Datos generales</h2>
+
+      <form id="mainForm">
+        <div class="grid">
+          <div class="field">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+
+          <div class="field">
+            <label for="cu">CU</label>
+            <input type="text" id="cu" name="cu" placeholder="Ej: CU-001" required>
+          </div>
+
+          <div class="field">
+            <label for="local">Local</label>
+            <input type="text" id="local" name="local" placeholder="Ej: Lima" required>
+          </div>
+
+          <div class="field wide">
+            <label for="rectificador">Nombre Rectificador o UPS</label>
+            <input type="text" id="rectificador" name="rectificador" placeholder="Ej: UPS APC" required>
+          </div>
+
+          <div class="field">
+            <label for="tipoBateria">Tipo batería</label>
+            <input type="text" id="tipoBateria" name="tipoBateria" placeholder="Ej: OPzS / AGM" required>
+          </div>
+
+          <div class="field">
+            <label for="nBancos">N° bancos</label>
+            <input type="number" id="nBancos" name="nBancos" min="1" step="1" required>
+          </div>
+
+          <div class="field">
+            <label for="celdasPorBanco">Celdas por banco</label>
+            <input type="number" id="celdasPorBanco" name="celdasPorBanco" min="1" step="1" required>
+          </div>
+
+          <div class="field">
+            <label for="modeloEquipo">Modelo de equipo de medición</label>
+            <input type="text" id="modeloEquipo" name="modeloEquipo" placeholder="Ej: Hioki BT3562A">
+          </div>
+
+          <div class="field">
+            <label for="estado">Estado (Ok / Nok)</label>
+            <select id="estado" name="estado" required>
+              <option value="">Seleccione</option>
+              <option value="OK">OK</option>
+              <option value="NOK">NOK</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="temp">C°</label>
+            <input type="number" id="temp" name="temp" step="0.1" placeholder="Ej: 25.0">
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="row between">
+        <h2>Detalle por celda</h2>
+        <div class="row gap">
+          <button type="button" id="btnAddRow">+ Agregar fila</button>
+          <button type="button" class="danger" id="btnRemoveSelected">- Eliminar seleccionadas</button>
+        </div>
+      </div>
+
+      <div class="tableWrap">
+        <table id="detalleTable">
+          <thead>
+            <tr>
+              <th class="center">Sel</th>
+              <th>Banco #</th>
+              <th>N° Celda</th>
+              <th>V reposo (V)</th>
+              <th>RI / Impedancia (µΩ o mΩ)</th>
+              <th>Resultado celda</th>
+              <th>Observaciones</th>
+              <th>FEC. FABRICAC</th>
+              <th>RI ORIGEN</th>
+            </tr>
+          </thead>
+          <tbody id="detalleBody"></tbody>
+        </table>
+      </div>
+
+      <p class="hint">Tip: Puedes agregar varias filas y luego “Guardar” o “Exportar”.</p>
+
+      <div class="row gap end">
+        <button type="button" id="btnSave">Guardar (Local)</button>
+        <button type="button" class="secondary" id="btnLoad">Cargar guardado</button>
+        <button type="button" class="secondary" id="btnExportCSV">Exportar CSV (Excel)</button>
+        <button type="button" id="btnExport">Exportar JSON</button>
+        <button type="button" class="ghost" id="btnClear">Limpiar</button>
+        </div>
+
+      <pre id="output" class="output" aria-live="polite"></pre>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -24,7 +24,8 @@
         type="text"
         id="asunto"
         name="asunto"
-        placeholder="Ejemplo: Incidencia ACC00000XX// Tipo de Incidencia // Tipo de Afectación // Torre // Site"
+        value="Incidencia ACC00000XX// Tipo de Incidencia // Tipo de Afectación // Torre // Site"
+        readonly
       />
     </div>
 
@@ -40,7 +41,6 @@
           </td>
         </tr>
 
-
         <tr>
           <td class="label">Empresa:</td>
           <td colspan="3">
@@ -52,9 +52,6 @@
             </select>
           </td>
         </tr>
-
-
-
 
         <tr>
           <td class="label">Área Integratel (responsable):</td>
@@ -68,7 +65,20 @@
           </td>
         </tr>
 
-
+        <!-- NUEVO: buscador para autocompletar -->
+        <tr>
+          <td class="label">Buscar relación:</td>
+          <td colspan="3" class="autocomplete-cell">
+            <input
+              type="text"
+              id="buscadorSite"
+              placeholder="Buscar por código único, site o torrero"
+              autocomplete="off"
+            />
+            <div id="sugerenciasSite" class="autocomplete-list"></div>
+            <small class="file-help">Este campo solo ayuda a autocompletar. No se registra.</small>
+          </td>
+        </tr>
 
         <tr>
           <td class="label">Código único:</td>
@@ -91,7 +101,6 @@
           </td>
         </tr>
 
-
         <tr>
           <td class="label">Sitio coubicado:</td>
           <td>
@@ -109,6 +118,7 @@
           <td></td>
         </tr>
 
+        
         <tr>
           <td class="label">Impedimiento de trabajos:</td>
           <td>
@@ -173,12 +183,6 @@
               Áreas libres
             </label>
           </td>
-          <td>
-            <label class="option-label">
-              <input type="checkbox" name="sitioIncidencia" value="Otros" />
-              Otros
-            </label>
-          </td>
         </tr>
 
         <tr>
@@ -210,18 +214,13 @@
         </tr>
 
         <tr>
-          <td class="label">Ticket de atención:</td>
+          <td class="label">Ticket de atención para torrera ATP/ATC:</td>
           <td colspan="3">
             <input type="text" id="ticketAtencion" name="ticketAtencion" placeholder="Ingrese el ticket de atención" />
           </td>
         </tr>
 
-        <tr>
-          <td class="label">Para torrera ATP y ATC:</td>
-          <td colspan="3">
-            <input type="text" id="paraTorrera" name="paraTorrera" placeholder="Ingrese información adicional" />
-          </td>
-        </tr>
+
 
         <tr>
           <td class="label">Adjuntar evidencia:</td>
@@ -249,6 +248,7 @@
     </div>
   </div>
 
+  <script src="sites-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

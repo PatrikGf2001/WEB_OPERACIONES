@@ -9,7 +9,82 @@ const btnEnviar = document.getElementById("btnEnviar");
 
 const API_URL = "https://script.google.com/macros/s/AKfycbxnQ0aZtbZ6Rx54YJQvrOg4vf6mqn02DoGur_MxETD5KXY5ANlx1r5NSx180_ZbhKtYJA/exec";
 
+/* =========================
+   AUTOCOMPLETADO DE SITES
+========================= */
+const buscadorSite = document.getElementById("buscadorSite");
+const sugerenciasSite = document.getElementById("sugerenciasSite");
+const inputCodigoUnico = document.getElementById("codigoUnico");
+const inputSite = document.getElementById("site");
+const inputTorrero = document.getElementById("torrero");
 
+if (buscadorSite && sugerenciasSite && typeof sitesData !== "undefined") {
+  buscadorSite.addEventListener("input", function () {
+    const texto = buscadorSite.value.trim().toLowerCase();
+
+    if (texto.length < 2) {
+      ocultarSugerencias();
+      return;
+    }
+
+    const resultados = sitesData.filter((item) => {
+      const codigo = String(item.codigoUnico || "").toLowerCase();
+      const site = String(item.site || "").toLowerCase();
+      const torrero = String(item.torrero || "").toLowerCase();
+
+      return (
+        codigo.includes(texto) ||
+        site.includes(texto) ||
+        torrero.includes(texto)
+      );
+    }).slice(0, 15);
+
+    renderizarSugerencias(resultados);
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!sugerenciasSite.contains(e.target) && e.target !== buscadorSite) {
+      ocultarSugerencias();
+    }
+  });
+}
+
+function renderizarSugerencias(resultados) {
+  sugerenciasSite.innerHTML = "";
+
+  if (!resultados.length) {
+    sugerenciasSite.innerHTML = `<div class="autocomplete-empty">Sin coincidencias. Puede ingresar los datos manualmente.</div>`;
+    sugerenciasSite.style.display = "block";
+    return;
+  }
+
+  resultados.forEach((item) => {
+    const div = document.createElement("div");
+    div.className = "autocomplete-item";
+    div.textContent = `${item.codigoUnico} | ${item.site} | ${item.torrero}`;
+
+    div.addEventListener("click", function () {
+      inputCodigoUnico.value = item.codigoUnico || "";
+      inputSite.value = item.site || "";
+      inputTorrero.value = item.torrero || "";
+      buscadorSite.value = `${item.codigoUnico} | ${item.site} | ${item.torrero}`;
+      ocultarSugerencias();
+    });
+
+    sugerenciasSite.appendChild(div);
+  });
+
+  sugerenciasSite.style.display = "block";
+}
+
+function ocultarSugerencias() {
+  sugerenciasSite.style.display = "none";
+  sugerenciasSite.innerHTML = "";
+}
+
+/* =========================
+   ENVÍO DEL FORMULARIO
+========================= */
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -38,7 +113,7 @@ form.addEventListener("submit", async function (e) {
       tipoMantenimiento: document.getElementById("tipoMantenimiento").value,
       tipoAfectacion: document.getElementById("tipoAfectacion").value,
       ticketAtencion: document.getElementById("ticketAtencion").value.trim(),
-      paraTorrera: document.getElementById("paraTorrera").value.trim(),
+      //paraTorrera: document.getElementById("paraTorrera").value.trim(),
       evidencias: evidencias
     };
 
@@ -59,6 +134,12 @@ form.addEventListener("submit", async function (e) {
       popupExito.classList.add("active");
 
       form.reset();
+
+      if (buscadorSite) {
+        buscadorSite.value = "";
+      }
+
+      ocultarSugerencias();
     } else {
       mensaje.textContent = result.message || "Ocurrió un error al guardar.";
       mensaje.style.color = "red";
@@ -77,6 +158,12 @@ btnLimpiar.addEventListener("click", function () {
   form.reset();
   mensaje.textContent = "";
   ticketIdInput.value = "Generado automáticamente";
+
+  if (buscadorSite) {
+    buscadorSite.value = "";
+  }
+
+  ocultarSugerencias();
 });
 
 cerrarPopup.addEventListener("click", function () {

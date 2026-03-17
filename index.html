@@ -24,7 +24,7 @@
         type="text"
         id="asunto"
         name="asunto"
-        placeholder="Ejemplo: CHAPA AVERIADA EN EL BUZON // ACCESO POR EMERGENCIA // ATC // BAJA_CAJAMARQUILLA"
+        placeholder="Ejemplo: Incidencia ACC00000XX// Tipo de Incidencia // Tipo de Afectación // Torre // Site"
       />
     </div>
 
@@ -40,17 +40,40 @@
           </td>
         </tr>
 
+
         <tr>
           <td class="label">Empresa:</td>
           <td colspan="3">
-            <input type="text" id="empresa" name="empresa" placeholder="Ingrese la empresa" />
+            <select id="empresa" name="empresa">
+              <option value="">Seleccione una opción</option>
+              <option value="FLM HUAWEI">FLM HUAWEI</option>
+              <option value="FLM COMFICA">FLM COMFICA</option>
+              <option value="INTEGRATEL">INTEGRATEL</option>
+            </select>
           </td>
         </tr>
 
+
+
+
         <tr>
-          <td class="label">Área TdP (encargada del trabajo):</td>
+          <td class="label">Área Integratel (responsable):</td>
           <td colspan="3">
-            <input type="text" id="areaTdp" name="areaTdp" placeholder="Ingrese el área responsable" />
+            <select id="areaTdp" name="areaTdp">
+              <option value="">Seleccione una opción</option>
+              <option value="Operaciones">Operaciones</option>
+              <option value="DRH">DRH</option>
+              <option value="Optimización">Optimización</option>
+            </select>
+          </td>
+        </tr>
+
+
+
+        <tr>
+          <td class="label">Código único:</td>
+          <td colspan="3">
+            <input type="text" id="codigoUnico" name="codigoUnico" placeholder="Ingrese el código único" />
           </td>
         </tr>
 
@@ -62,11 +85,12 @@
         </tr>
 
         <tr>
-          <td class="label">Código único:</td>
+          <td class="label">Torrero:</td>
           <td colspan="3">
-            <input type="text" id="codigoUnico" name="codigoUnico" placeholder="Ingrese el código único" />
+            <input type="text" id="torrero" name="torrero" placeholder="Ingrese el nombre del torrero" />
           </td>
         </tr>
+
 
         <tr>
           <td class="label">Sitio coubicado:</td>
@@ -83,13 +107,6 @@
             </label>
           </td>
           <td></td>
-        </tr>
-
-        <tr>
-          <td class="label">Torrero:</td>
-          <td colspan="3">
-            <input type="text" id="torrero" name="torrero" placeholder="Ingrese el nombre del torrero" />
-          </td>
         </tr>
 
         <tr>
@@ -172,8 +189,7 @@
               <option value="Preventivo">Preventivo</option>
               <option value="Correctivo">Correctivo</option>
               <option value="Desmontaje de antenas">Desmontaje de antenas</option>
-              <option value="Rechazo">Rechazo</option>
-              <option value="PIM">PIM</option>
+              <option value="Proactivo">Proactivo</option>
               <option value="SWAP">SWAP</option>
             </select>
           </td>
